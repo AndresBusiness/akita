@@ -1,0 +1,28 @@
+
+<app-header></app-header>
+
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Estatus</th>
+        <th>Operaciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of list">
+        <td>{{ product.id }}</td>
+        <td>{{ product.nombre }}</td>
+        <td>{{ product.descripcion }}</td>
+        <td>{{ product.precio }}</td>
+        <td>{{ product.estatus ? 'Activo' : 'Inactivo' }}</td>
+        <td><span (click)="eliminar(product.id)">Eliminar</span> </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<app-footer></app-footer>
