@@ -17,7 +17,7 @@ export class ProductQuery extends QueryEntity<ProductsState, Products> {
     selectInactiveProductsCount() {
        return this.selectCount(product => product.estatus === false);
     }
- 
+
     getTotal() {
         return this.selectCount();
      }

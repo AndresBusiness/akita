@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'; 
 import { Products, ProductsStore} from './state/product.store';
 import { ProductQuery } from './state/product.query';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -11,6 +12,8 @@ import { ProductQuery } from './state/product.query';
 export class AppComponent {
   title = 'akita';
   list: Products[]= [];
+  loading:boolean|undefined =true;
+  public subs: Array<Subscription> = [];
 
   public products:Products[] = [
     {
@@ -38,16 +41,29 @@ export class AppComponent {
   
   
   constructor(private productStore: ProductsStore, private productQuery:ProductQuery) {
-      // productStore.add(this.products[0]);
-      //productStore.add(this.products);
+    productStore.setLoading(true);
+  setTimeout(() => {
+    
       productStore.set(this.products);
-      this.list = productQuery.getAll(); 
+      let s = productQuery.selectAll().subscribe(data=>{
+        this.list = data;
+      });           
+      this.loading = productStore.getValue().loading; 
+      this.subs.push(s);
+  }, 3000);
+
+     
+
+
   }
 
   public eliminar(id:number){
     this.productStore.remove(id)
   }
 
+  ngOnDestroy(): void {
+    this.subs.forEach(s => s?.unsubscribe());
+  }
 
 
   
