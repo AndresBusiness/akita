@@ -39,8 +39,9 @@ export class ProductService {
     this.productStore.updateSearch(term);
   }
 
-  public addComment(id:number, nombre:string, comentario:string) {
-    this.productStore.addComment(id, nombre, comentario);
+
+  public addArrayComment(id:number, nombre:string, comentario:string) {
+    this.productStore.addArrayComment(id, nombre, comentario);
   }
 
 }

@@ -142,7 +142,7 @@ export class AppComponent {
   }
 
   public addComment(){
-    this.productService.addComment(10, "Anahi","Pesimo producto")
+    this.productService.addArrayComment(10, "Anahi","Pesimo producto")
   }
 
   ngOnDestroy(): void {

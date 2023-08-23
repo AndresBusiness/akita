@@ -83,12 +83,12 @@ export class ProductsStore extends EntityStore<ProductsState, Products> {
           search: search
         }));
       }
-
-      public addComment(id:number, nombre:string, comentario:string) {
-        this.update(id, (product)=>{
+ 
+      public addArrayComment(id: number, nombre: string, comentario: string) {
+        this.update(id, (producto:any) => {
           return {
-            comentarios : [ ... product.comentarios, {nombre, comentario}]
-          }
+            comentarios: arrayAdd(producto.comentarios, { nombre, comentario })
+          };
         });
       }
       
