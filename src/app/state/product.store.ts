@@ -1,10 +1,11 @@
-import { EntityState, EntityStore, Order, StoreConfig } from '@datorama/akita';
+import { EntityState, EntityStore, Order, StoreConfig, arrayAdd } from '@datorama/akita';
 export interface Products {
     id: number;
     nombre: string;
     descripcion:string;
     precio: number;
     estatus: boolean;
+    comentarios?:any;
   }
   
 export interface ProductsState extends EntityState<Products> {
@@ -61,16 +62,34 @@ export class ProductsStore extends EntityStore<ProductsState, Products> {
           ...state,
           sort: {
             orderBy: field,
-            order: sort
+            order: sort  //asc, desc
           }
         }));
       }
+
+      public updateFilter(ids:number[]): void {
+        this.update((state)=>({
+          ...state,
+          filters :{
+            productsIds: ids
+          },
+        }));
+      }
+
     
       public updateSearch(search: string) {
         this.update((state) => ({
           ...state,
           search: search
         }));
+      }
+
+      public addComment(id:number, nombre:string, comentario:string) {
+        this.update(id, (product)=>{
+          return {
+            comentarios : [ ... product.comentarios, {nombre, comentario}]
+          }
+        });
       }
       
 }

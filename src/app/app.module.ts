@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ProductsStore } from './state/product.store';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [		
@@ -14,6 +15,7 @@ import { ProductsStore } from './state/product.store';
    ],
   imports: [
     BrowserModule,
+    FormsModule
     
   ],
   providers: [ProductsStore],

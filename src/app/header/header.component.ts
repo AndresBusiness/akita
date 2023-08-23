@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   constructor(private productQuery:ProductQuery) { }
 
   ngOnInit() {
-    this.productQuery.getTotal().subscribe(data=>{
+    this.productQuery.seletTotal().subscribe(data=>{
       this.total = data;
     })
  

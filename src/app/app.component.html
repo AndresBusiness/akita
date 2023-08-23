@@ -2,15 +2,31 @@
 <app-header></app-header>
 
 <div class="container">
-
+<div class="text-center">
   <span>{{loading?'cargando..':''}}</span>
+</div>
+<ng-container *ngIf="!loading">
+  <div class="input-group mb-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Buscar..."
+      [(ngModel)]="searchTerm"
+      aria-label="Búsqueda"
+      aria-describedby="search-button"
+      (ngModelChange)="search()"
+    >
+    <div class="input-group-append">
+      <button (click)="addComment()" class="btn btn-outline-secondary" type="button" id="search-button">agregar comentario</button>
+    </div>
+  </div>
   <table class="table">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Descripción</th>
-        <th>Precio</th>
+        <th>ID </th>
+        <th>Nombre <button class="btn btn-link btn-sm" (click)="ordenar('nombre', 'asc')">▲</button><button class="btn btn-link btn-sm" (click)="ordenar('nombre', 'desc')">▼</button></th>
+        <th>Descripción <button class="btn btn-link btn-sm" (click)="ordenar('descripcion', 'asc')">▲</button><button class="btn btn-link btn-sm" (click)="ordenar('descripcion', 'desc')">▼</button></th>
+        <th>Precio </th>
         <th>Estatus</th>
         <th>Operaciones</th>
       </tr>
@@ -21,10 +37,13 @@
         <td>{{ product.nombre }}</td>
         <td>{{ product.descripcion }}</td>
         <td>{{ product.precio }}</td>
-        <td>{{ product.estatus ? 'Activo' : 'Inactivo' }}</td>
+        <td>{{ product?.comentarios | json }}</td>
         <td><span (click)="eliminar(product.id)">Eliminar</span> </td>
       </tr>
     </tbody>
   </table>
+
+</ng-container>
+
 </div>
 <app-footer></app-footer>

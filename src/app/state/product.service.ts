@@ -1,5 +1,4 @@
 
-// src/app/state/task.service.ts
 import { Injectable } from '@angular/core';
 import { Products, ProductsStore } from './product.store';
 
@@ -12,13 +11,38 @@ export class ProductService {
     this.productStore.update((entity:Products) => entity.id == id, { descripcion: descripcion, precio: precio  });
   }
 
-  public addTask(product: Products) {
+  public addProduct(product: Products) {
+    this.productStore.add(product);
+  }
+  public addProducts(product: Products[]) {
     this.productStore.add(product);
   }
 
-  public removeTask(id: number) {
+  public setProducts(product: Products[]) {
+    this.productStore.set(product);
+  }
+
+  public removeProduct(id: number) {
     this.productStore.remove(id);
   }
+
+  public filterProducts(ids: number[]) {
+    this.productStore.updateFilter(ids);
+  }
+
+  public sortProducts(campo: string, sort: string) {
+    this.productStore.updateSort(campo, sort);
+  }
+
+
+  public searchProducts(term:string) {
+    this.productStore.updateSearch(term);
+  }
+
+  public addComment(id:number, nombre:string, comentario:string) {
+    this.productStore.addComment(id, nombre, comentario);
+  }
+
 }
 
 
